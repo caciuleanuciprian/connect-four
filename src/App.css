@@ -32,12 +32,12 @@
 }
 
 .nav {
-  max-width: 1600px;
+  width: 650px;
   height: 10vh;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 
@@ -52,6 +52,14 @@
   font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+
+.btn--menu {
+  margin-right: auto;
+}
+
+.btn--restart {
+  margin-left: auto;
 }
 
 .btn:hover {
@@ -182,23 +190,35 @@
   box-shadow: 0px 5px 0px 0px var(--black);
 }
 
+.player-color--red {
+  background-color: var(--red);
+}
+.player-color--yellow {
+  background-color: var(--yellow);
+}
+
 .board {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
   align-items: center;
   justify-items: center;
   background-color: var(--white);
   position: relative;
-  padding: 35px;
-  grid-gap: 30px;
+  padding: 15px 15px 50px 15px;
   border-radius: 50px;
   width: 950px;
   height: 890px;
-  padding-bottom: 100px;
   border: 3px solid var(--black);
   -webkit-box-shadow: 0px 20px 0px 0px var(--black);
   box-shadow: 0px 20px 0px 0px var(--black);
+}
+
+.row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .cell {
@@ -206,10 +226,25 @@
   height: 100px;
   background-color: var(--light-purple);
   border-radius: 50%;
-  -webkit-box-shadow: inset 0px 15px 0px 0px #000000;
-  box-shadow: inset 0px 15px 0px 0px #000000;
+  -webkit-box-shadow: inset 0px 15px 0px 0px var(--black);
+  box-shadow: inset 0px 15px 0px 0px var(--black);
   cursor: pointer;
   text-align: center;
+  border: 3px solid var(--black);
+}
+
+.cell.cell--red,
+.cell.cell--yellow {
+  -webkit-box-shadow: inset 0px 7px 0px 0px var(--black);
+  box-shadow: inset 0px 7px 0px 0px rgba(0, 0, 0, 0.375);
+}
+
+.cell--red {
+  background-color: var(--red);
+}
+
+.cell--yellow {
+  background-color: var(--yellow);
 }
 
 .timer {
@@ -241,4 +276,152 @@
   font-size: 72px;
   color: var(--white);
   margin-bottom: 15px;
+}
+
+@media screen and (max-width: 1920px) {
+  .board {
+    width: 700px;
+    height: 650px;
+  }
+
+  .cell {
+    width: 65px;
+    height: 65px;
+  }
+
+  .timer {
+    bottom: -100px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .content {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .player {
+    order: 1;
+    min-width: 200px;
+    min-height: 100px;
+  }
+
+  .board {
+    order: 2;
+    margin-top: 25px;
+  }
+
+  .player-color {
+    top: 20px;
+  }
+
+  .player-color--red {
+    left: -25px;
+  }
+  .player-color--yellow {
+    right: -25px;
+  }
+
+  .timer {
+    height: 125px;
+    bottom: -80px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .board {
+    width: 600px;
+    height: 575px;
+  }
+
+  .cell {
+    width: 50px;
+    height: 50px;
+    -webkit-box-shadow: inset 0px 10px 0px 0px #000000;
+    box-shadow: inset 0px 10px 0px 0px #000000;
+  }
+
+  .nav {
+    width: 600px;
+  }
+
+  .timer {
+    bottom: -60px;
+    width: 200px;
+    height: 125px;
+  }
+
+  .player {
+    min-width: 150px;
+    min-height: 75px;
+  }
+
+  .player-name {
+    font-size: 18px;
+  }
+
+  .player-score {
+    font-size: 36px;
+  }
+
+  .player-color {
+    width: 40px;
+    height: 40px;
+    top: 15px;
+  }
+
+  .timer-player-name {
+    font-size: 18px;
+  }
+
+  .timer-seconds {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .board {
+    width: 425px;
+    height: 475px;
+  }
+
+  .cell {
+    width: 40px;
+    height: 40px;
+    -webkit-box-shadow: inset 0px 8px 0px 0px #000000;
+    box-shadow: inset 0px 8px 0px 0px #000000;
+  }
+
+  .timer {
+    bottom: -50px;
+    width: 175px;
+    height: 100px;
+  }
+
+  .player {
+    min-width: 125px;
+    min-height: 50px;
+  }
+
+  .player-name {
+    font-size: 16px;
+  }
+
+  .player-score {
+    font-size: 32px;
+  }
+
+  .player-color {
+    width: 30px;
+    height: 30px;
+    top: 10px;
+  }
+
+  .timer-player-name {
+    font-size: 16px;
+  }
+
+  .timer-seconds {
+    font-size: 48px;
+  }
 }
