@@ -1,6 +1,6 @@
 import "./App.css";
-import Navigation from "./components/Navigation";
-import Content from "./components/Content";
+import Navigation from "./components/layouts/Navigation";
+import Content from "./components/layouts/Content";
 import { useGameReducer } from "./hooks/useGameReducer";
 import { useState } from "react";
 

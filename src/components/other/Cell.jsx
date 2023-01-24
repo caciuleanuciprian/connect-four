@@ -6,6 +6,7 @@ const Cell = ({ value, play, columnIndex }) => {
   } else if (value === 2) {
     color = "yellow";
   }
+
   return (
     <div
       className={`cell cell--${color}`}

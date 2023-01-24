@@ -19,6 +19,80 @@
   background-color: var(--light-purple);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.blur {
+  filter: blur(8px);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  height: 40vh;
+  background: rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  border-radius: 25px;
+  animation: fadeIn 0.3s ease-in-out;
+  border: 3px #000000 solid;
+  -webkit-box-shadow: 0px 10px 0px 0px #000000;
+  box-shadow: 0px 10px 0px 0px #000000;
+}
+
+.modal__content {
+  width: 100%;
+  height: 100%;
+  color: #000000;
+  font-family: "Kanit", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  padding: 5px 25px;
+}
+
+.modal__header {
+  font-size: 48px;
+  text-transform: uppercase;
+  color: #7945fb;
+}
+
+.modal__paragraph {
+  font-size: 18px;
+}
+
+button.close {
+  background-color: #7945fb;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 25px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family: var(--kanit);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button.close:hover {
+  opacity: 0.75;
 }
 
 .floor {
@@ -54,7 +128,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.btn--menu {
+.btn--tutorial {
   margin-right: auto;
 }
 
@@ -79,21 +153,6 @@
   align-items: center;
   position: relative;
 }
-
-/* TODO - Implement animation trigger when game starts */
-/* .logo-container:hover {
-  animation: rotate 1s ease-in-out infinite;
-  transition: all 0.3s ease-in-out;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-} */
 
 .ball-rt-1 {
   width: 30px;
@@ -233,10 +292,24 @@
   border: 3px solid var(--black);
 }
 
+@keyframes cell-anim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .cell.cell--red,
 .cell.cell--yellow {
   -webkit-box-shadow: inset 0px 7px 0px 0px var(--black);
   box-shadow: inset 0px 7px 0px 0px rgba(0, 0, 0, 0.375);
+  animation: cell-anim 1s ease-in-out infinite;
+  transition: all 0.3s ease-in-out;
 }
 
 .cell--red {
@@ -247,31 +320,32 @@
   background-color: var(--yellow);
 }
 
-.timer {
+.messages {
   position: absolute;
   bottom: -80px;
   background-color: var(--pink);
-  height: 150px;
-  width: 250px;
+  height: 125px;
+  width: 225px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   border-radius: 15px;
   border: 3px solid var(--black);
   -webkit-box-shadow: 0px 10px 0px 0px var(--black);
   box-shadow: 0px 10px 0px 0px var(--black);
   color: var(--black);
+  text-align: center;
 }
 
-.timer-player-name {
+.messages-player-name {
   font-family: var(--kanit);
   font-size: 24px;
   text-transform: uppercase;
   color: var(--white);
 }
 
-.timer-seconds {
+.messages-seconds {
   font-family: var(--kanit);
   font-size: 72px;
   color: var(--white);
@@ -288,10 +362,6 @@
     width: 65px;
     height: 65px;
   }
-
-  .timer {
-    bottom: -100px;
-  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -300,6 +370,10 @@
     justify-content: space-evenly;
   }
 
+  .modal {
+    width: 50vw;
+    height: 50vh;
+  }
   .player {
     order: 1;
     min-width: 200px;
@@ -321,17 +395,17 @@
   .player-color--yellow {
     right: -25px;
   }
-
-  .timer {
-    height: 125px;
-    bottom: -80px;
-  }
 }
 
 @media screen and (max-width: 770px) {
   .board {
     width: 600px;
     height: 575px;
+  }
+
+  .modal {
+    width: 70vw;
+    height: 70vh;
   }
 
   .cell {
@@ -345,10 +419,9 @@
     width: 600px;
   }
 
-  .timer {
+  .messages {
     bottom: -60px;
-    width: 200px;
-    height: 125px;
+    height: 100px;
   }
 
   .player {
@@ -370,16 +443,33 @@
     top: 15px;
   }
 
-  .timer-player-name {
+  .messages-player-name {
     font-size: 18px;
   }
 
-  .timer-seconds {
+  .messages-seconds {
     font-size: 60px;
   }
 }
 
 @media screen and (max-width: 600px) {
+  .nav {
+    width: 400px;
+  }
+
+  .modal {
+    width: 80vw;
+    height: 80vh;
+  }
+
+  .modal__header {
+    font-size: 32px;
+  }
+
+  .modal__paragraph {
+    font-size: 14px;
+  }
+
   .board {
     width: 425px;
     height: 475px;
@@ -392,15 +482,10 @@
     box-shadow: inset 0px 8px 0px 0px #000000;
   }
 
-  .timer {
-    bottom: -50px;
-    width: 175px;
-    height: 100px;
-  }
-
   .player {
-    min-width: 125px;
+    width: 50%;
     min-height: 50px;
+    margin-top: 15px;
   }
 
   .player-name {
@@ -417,11 +502,19 @@
     top: 10px;
   }
 
-  .timer-player-name {
+  .player-color--red {
+    left: -15px;
+  }
+
+  .player-color--yellow {
+    right: -15px;
+  }
+
+  .messages-player-name {
     font-size: 16px;
   }
 
-  .timer-seconds {
+  .messages-seconds {
     font-size: 48px;
   }
 }

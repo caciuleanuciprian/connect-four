@@ -1,6 +1,9 @@
-import Timer from "./Timer";
-import Row from "./Row";
-import { deepCloneBoard, checkWinner } from "../services/utils/connect4Utils";
+import Messages from "../other/Messages";
+import Row from "../other/Row";
+import {
+  deepCloneBoard,
+  checkWinner,
+} from "../../services/utils/connect4Utils";
 
 const Board = ({
   gameState,
@@ -19,6 +22,7 @@ const Board = ({
       }
 
       let result = checkWinner(board);
+      console.log(result);
       if (result === gameState.player1) {
         dispatchGameState({
           type: "END_GAME",
@@ -47,7 +51,6 @@ const Board = ({
         dispatchGameState({
           type: "TOGGLE_PLAYER",
           nextPlayer: nextPlayer,
-          message: `Player ${nextPlayer}'s turn`,
           board: board,
         });
       }
@@ -64,7 +67,7 @@ const Board = ({
       {gameState.board.map((row, index) => {
         return <Row row={row} play={play} key={index} />;
       })}
-      <Timer gameState={gameState} />
+      <Messages gameState={gameState} />
     </div>
   );
 };
